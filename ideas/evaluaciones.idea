@@ -1,0 +1,42 @@
+evaluaciones: Quizas pueda mezclar todo esto para evaluar al desarrollador, puedo integrar un sistema de pruebas de inicio, para que el
+desarrollador, pueda probarse y nosotros asignarle un nivel inicial para que no tenga que iniciar siempre como newbie,
+ademas de un sistema de evaluacion, donde por cada proyecto terminado en el cual fue colaborador obtendra una "star", 
+ademas los proyectos quedaran publicos y estos se podran ratear, en base a un sistema de "me gusta" y "no me gusta" 
+esto se promedia para dar un puntaje de cuanto le gusto a la comunidad para obtener un puntaje de cuantos proyectos 
+ah terminado y el impacto de estos en la comunidad para ir midiendo el nivel del desarrollador, esto te servira para 
+subir de newbie a jr de jr a intermedio y de intermedio a ssr y para subir de ssr a sr y e sr a arquitecto, se 
+necesitaran evaluaciones diferentes con pruebas complicadas, exp en proyectos especiales donde deberia haber una madia 
+de nivel de colaboradores ssr,sr o arquitectos, si tienes proyectos donde la media de colaboradores es sr y tu eres 
+ssr, puedes pedir una evaluacion para convertirte en sr y asi progresivamente.
+
+
+Suena como una propuesta sólida y bien estructurada para evaluar y asignar niveles a los desarrolladores en tu plataforma.
+Integrar un sistema de pruebas iniciales para permitir a los desarrolladores demostrar sus habilidades desde el principio
+es una excelente idea. Además, el sistema de evaluación basado en proyectos, la acumulación de "stars" por proyectos 
+terminados y la valoración de proyectos por la comunidad son enfoques efectivos para medir el rendimiento y la 
+contribución de los desarrolladores.
+
+Aquí hay algunos puntos clave a considerar al implementar este sistema:
+
+Transparencia:
+
+Asegúrate de que el proceso de evaluación y los criterios para subir de nivel sean transparentes y comprensibles para los desarrolladores. Esto fomentará la confianza y la participación activa.
+Retroalimentación Constructiva:
+
+Proporciona retroalimentación constructiva a los desarrolladores, especialmente después de pruebas y evaluaciones. Esto les permitirá comprender áreas de mejora y trabajar en su desarrollo.
+Flexibilidad:
+
+Mantén cierta flexibilidad en el sistema para adaptarte a las circunstancias individuales y a la evolución de las habilidades de los desarrolladores.
+Incentivos:
+
+Considera la posibilidad de ofrecer incentivos tangibles o reconocimientos para motivar a los desarrolladores a mejorar continuamente y aportar significativamente a la comunidad.
+Evaluaciones Especiales:
+
+Diseña evaluaciones específicas para los niveles más altos, como las pruebas complicadas y la experiencia en proyectos especiales. Asegúrate de que estas evaluaciones reflejen la complejidad y responsabilidades asociadas con esos niveles.
+Mentoría:
+
+Implementa un sistema de mentoría donde los desarrolladores más experimentados puedan guiar y ayudar en el desarrollo de aquellos que están en niveles inferiores.
+Monitoreo Continuo:
+
+Realiza un monitoreo continuo del sistema para identificar áreas de mejora y ajusta los criterios según sea necesario.
+Este enfoque holístico debería permitir un crecimiento gradual y medido de los desarrolladores en tu plataforma. ¡Buena suerte con la implementación!
