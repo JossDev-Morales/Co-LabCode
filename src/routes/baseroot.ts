@@ -1,0 +1,1 @@
+export const BR="/colab-api/v1"

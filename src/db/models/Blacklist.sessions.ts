@@ -7,7 +7,7 @@ const blacklist = DB.define("blacklist",{
         type:DataTypes.UUID,
         primaryKey:true
     },
-    CredentialsId:{
+    credentialsId:{
         type:DataTypes.UUID,
         allowNull:false
     },

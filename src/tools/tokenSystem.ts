@@ -82,7 +82,6 @@ export class TokenDecoder {
       const payload = jwt.verify(token, this.#key);
       return payload as object | JwtPayload;
     } catch (error) {
-      console.log(error);
       throw error;
     }
   }

@@ -28,6 +28,7 @@ export default function generalErrorHandler(
         nexterror instanceof ConnectionTimedOutError ||
         nexterror instanceof InvalidConnectionError
         ) {
+        console.warn("Error de tipo: ","Database error")
         res.status(500).json({
             status:500,
             code:50,
@@ -38,9 +39,10 @@ export default function generalErrorHandler(
         })
     }
     if(nexterror instanceof ValidationError){
+      console.warn("Error de tipo: ","Database validation error")
         res.status(400).json({
             status:400,
-            code:50,
+            code:51,
             type:"Database validation error",
             name:nexterror.name,
             message:nexterror.message,
@@ -52,9 +54,10 @@ export default function generalErrorHandler(
         throw nexterror
     }
   } catch (error) {
+    console.warn("Error de tipo: ","Server error")
     res.status(500).json({
         status:500,
-        code:50,
+        code:52,
         type:"Server error",
         name:(error as Error).name,
         message: (error as Error).message,

@@ -1,6 +1,42 @@
 import { DataTypes } from "sequelize";
 import DB from "../conf/db.conf";
+import { UUID } from "crypto";
 
+export interface usersModelInfo{
+  id:UUID
+  credentialsId:UUID
+  colabname:string
+  name:string
+  lastname:string
+  userImage:UUID
+  linkedin:string
+  github:string
+  portfolio:string
+  description:string
+  mainroleColab:UUID
+  rolesColab:Array<string>
+  phoneNumber:string
+  phonePrefix:string
+  stars:number
+  followers:number
+  follows:number
+  opendesProjects:number
+  currentColabs:number
+  isPremium:boolean
+  devSeniority:[
+    "Newbie",
+    "Semi Junior",
+    "Junior",
+    "Semi Senior",
+    "Senior",
+    "architect",
+  ]
+  resume:UUID
+  mkProfile:UUID
+  mkStyles:Record<string,any>
+  posts:number
+  configs:Record<string,any>
+}
 const userModel = DB.define(
   "User",
   {

@@ -1,6 +1,18 @@
 import { DataTypes } from "sequelize";
 import DB from "../conf/db.conf";
 import bcrypt from "bcrypt";
+import { UUID } from "crypto";
+
+export interface credentialModelInfo {
+  id?:UUID
+  mail:string
+  password:string
+  recoveryMail:string
+  role?:string,
+  failedAttempts?:number
+  failedAttemptsDate?:Date
+  protected:boolean
+}
 const CredentialsModel = DB.define(
   "Credentials",
   {
@@ -27,11 +39,6 @@ const CredentialsModel = DB.define(
       type:DataTypes.STRING(40),
       allowNull:false
     },
-    registrationDate: {
-      type: DataTypes.DATE,
-      defaultValue: new Date(),
-      field: "registration_date",
-    },
     role: {
       type: DataTypes.ENUM,
       values: ["USER", "ADMIN", "MANAGER"],
@@ -50,9 +57,14 @@ const CredentialsModel = DB.define(
       type: DataTypes.BOOLEAN,
       defaultValue: false,
     },
+    verified:{
+      type:DataTypes.BOOLEAN,
+      defaultValue:false
+    }
   },
   {
     updatedAt: true,
+    createdAt:"registrationDate",
     hooks: {
       beforeUpdate: async (model, options) => {
         if (model.getDataValue("password") !== model.previous("password")) {
