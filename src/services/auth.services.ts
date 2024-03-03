@@ -15,19 +15,29 @@ export class authServices {
     phone,
     prefix,
     recoveryMail,
-    role
+    role,
   }: signinInfo) {
     try {
       const result = await DB.transaction(async (transaction) => {
-        
-        const credential = await CredentialsModel.create({
-          mail,
-          password,
-          recoveryMail,
-        });
+        const credential = await CredentialsModel.create(
+          {
+            mail,
+            password,
+            recoveryMail,
+          },
+          { transaction }
+        );
 
-        const user = await userModel.create({ colabname, phoneNumber:phone, phonePrefix:prefix,mainrolColab:role,credentialsId:credential.get("id") });
-        await transaction.commit()
+        const user = await userModel.create(
+          {
+            colabname,
+            phoneNumber: phone,
+            phonePrefix: prefix,
+            mainrolColab: role,
+            credentialsId: credential.get("id"),
+          },
+          { transaction }
+        );
         return {
           userId: user.get("id") as UUID,
           credentialId: credential.get("id") as UUID,
@@ -35,8 +45,7 @@ export class authServices {
       });
       return result;
     } catch (error) {
-      throw new customError("UserNotCrated",(error as Error).message,400,5)
+      throw new customError("UserNotCrated", (error as Error).message, 400, 5);
     }
   }
-  
 }
