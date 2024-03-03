@@ -44,7 +44,6 @@ async function signUpController(
       recoveryMail,
       role,
     });
-    console.log(credentialId,userId);
     
     const url = new URL(req.url, `http://${req.headers.host}`);
     await mailer.sendVerificationMail({
