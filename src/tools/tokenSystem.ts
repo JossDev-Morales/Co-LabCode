@@ -8,6 +8,8 @@ export interface authenticationPayload {
   colabname?: string;
   jti?:UUID
   role: "USER" | "ADMIN" | "MANAGER";
+  identifier?:UUID
+  actionId?:UUID
 }
 
 export class TokenSpreed {
@@ -45,13 +47,15 @@ export class TokenSpreed {
       expiresIn: "24h",
       issuer: "RECOVERY",
     });
+    return token
   }
-  public undo(ID: UUID) {
-    const token = jwt.sign({ identifier: ID }, this.#key, {
+  public undo(ID: UUID,actionId:UUID) {
+    const token = jwt.sign({ identifier: ID,actionId }, this.#key, {
       algorithm: "HS256",
       expiresIn: "7 days",
       issuer: "UNDO",
     });
+    return token
   }
 }
 export class TokenDecoder {

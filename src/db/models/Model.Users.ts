@@ -1,6 +1,8 @@
 import { DataTypes } from "sequelize";
 import DB from "../conf/db.conf";
 import { UUID } from "crypto";
+import CredentialsModel from "./Model.Credentials";
+import RolesModel from "./Model.Roles";
 
 export interface usersModelInfo{
   id:UUID
@@ -38,7 +40,7 @@ export interface usersModelInfo{
   configs:Record<string,any>
 }
 const userModel = DB.define(
-  "User",
+  "Users",
   {
     id: {
       type: DataTypes.UUID,
@@ -46,7 +48,12 @@ const userModel = DB.define(
       primaryKey: true,
     },
     credentialsId:{
-      type:DataTypes.UUID
+      type:DataTypes.UUID,
+      field:"credentials_id",
+      references:{
+        model:CredentialsModel,
+        key:'id'
+      }
     },    
     colabname: {
       type: DataTypes.STRING(30),
@@ -79,6 +86,10 @@ const userModel = DB.define(
       type: DataTypes.UUID,
       allowNull: false,
       field: "mainrol_colab",
+      references:{
+        model:RolesModel,
+        key:'id'
+      }
     },
     rolesColab: {
       type: DataTypes.ARRAY(DataTypes.STRING(30)),
@@ -152,7 +163,8 @@ const userModel = DB.define(
     },
   },
   {
-    timestamps: true
+    timestamps: true,
+    tableName:"usersinfo"
   }
 );
 export default userModel

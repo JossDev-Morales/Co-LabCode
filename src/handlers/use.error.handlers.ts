@@ -3,6 +3,6 @@ import generalErrorHandler from "./general.error.handler";
 import APIerrorHandler from "./api.error.handler";
 
 export default function errorHandlers(app:Application) {
-    app.use(generalErrorHandler)
     app.use(APIerrorHandler)
+    app.use(generalErrorHandler)
 }

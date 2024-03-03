@@ -10,6 +10,7 @@ import {
   InvalidConnectionError,
   DatabaseError,
 } from "sequelize";
+import { error } from "console";
 export default function generalErrorHandler(
   nexterror: Error,
   req: Request,
@@ -17,9 +18,7 @@ export default function generalErrorHandler(
   next: NextFunction
 ) {
   try {
-    if (nexterror instanceof customError) {
-      next(nexterror)
-    }
+    
     if (
         nexterror instanceof TimeoutError ||
         nexterror instanceof ConnectionError ||
@@ -37,8 +36,7 @@ export default function generalErrorHandler(
             message:nexterror.message,
             img:"https://http.cat/500"
         })
-    }
-    if(nexterror instanceof ValidationError){
+    } else if(nexterror instanceof ValidationError){
       console.warn("Error de tipo: ","Database validation error")
         res.status(400).json({
             status:400,
@@ -49,19 +47,20 @@ export default function generalErrorHandler(
             errors: (nexterror as ValidationError).errors,
             img:"https://http.cat/400"
         })
-    }
-    if (nexterror !instanceof DatabaseError) {
+    } else if (nexterror !instanceof DatabaseError) {
         throw nexterror
+    } else {
+      console.warn("Error de tipo: ","Server error")
+      res.status(500).json({
+          status:500,
+          code:52,
+          type:"Server error",
+          name:nexterror.name,
+          message: nexterror.message,
+          img:"https://http.cat/500"
+      })
     }
   } catch (error) {
-    console.warn("Error de tipo: ","Server error")
-    res.status(500).json({
-        status:500,
-        code:52,
-        type:"Server error",
-        name:(error as Error).name,
-        message: (error as Error).message,
-        img:"https://http.cat/500"
-    })
+    
   }
 }

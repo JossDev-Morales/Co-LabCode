@@ -3,8 +3,9 @@ import customError from "../tools/error";
 import logger from "../tools/logger";
 
  
-export default function APIerrorHandler(error:customError,req:Request,res:Response) {
-    logger(error)
+export default function APIerrorHandler(error:customError,req:Request,res:Response,next:NextFunction) {
+    if (error instanceof customError) {
+        logger(error)
     const APIerror:Record<string,any>={}
     if (error.code<10) {
         APIerror.type="Authentication"
@@ -23,4 +24,7 @@ export default function APIerrorHandler(error:customError,req:Request,res:Respon
     APIerror.code=error.code
     APIerror.errorInfo=error.info
     res.status(error.status || 400).json(APIerror)
+    } else {
+        next(error)
+    }
 }

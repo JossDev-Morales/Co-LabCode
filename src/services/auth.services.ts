@@ -15,43 +15,28 @@ export class authServices {
     phone,
     prefix,
     recoveryMail,
+    role
   }: signinInfo) {
     try {
       const result = await DB.transaction(async (transaction) => {
-        try {
-          const credential = await CredentialsModel.create({
-            mail,
-            password,
-            recoveryMail,
-          });
+        
+        const credential = await CredentialsModel.create({
+          mail,
+          password,
+          recoveryMail,
+        });
 
-          const user = await userModel.create({ colabname, phone, prefix });
-
-          return {
-            userId: user.get("id") as UUID,
-            credentialId: credential.get("id") as UUID,
-          };
-        } catch (error) {
-          throw new customError("UserNotCrated",(error as Error).message,400,5)
-        }
+        const user = await userModel.create({ colabname, phoneNumber:phone, phonePrefix:prefix,mainrolColab:role,credentialsId:credential.get("id") });
+        await transaction.commit()
+        return {
+          userId: user.get("id") as UUID,
+          credentialId: credential.get("id") as UUID,
+        };
       });
       return result;
     } catch (error) {
-      throw error;
+      throw new customError("UserNotCrated",(error as Error).message,400,5)
     }
   }
-  static async unprotect(credentialsId:UUID){
-    try {
-      await CredentialsModel.update({protected:false},{where:{credentialsId}})
-    } catch (error) {
-      throw error
-    }
-  }
-  static async protect(credentialsId:UUID){
-    try {
-      await CredentialsModel.update({protected:true},{where:{credentialsId}})
-    } catch (error) {
-      throw error
-    }
-  }
+  
 }

@@ -12,6 +12,11 @@ export interface credentialModelInfo {
   failedAttempts?:number
   failedAttemptsDate?:Date
   protected:boolean
+  verified:boolean
+}
+export interface authCredentialsInfo {
+  password?:string,
+  mail?:string
 }
 const CredentialsModel = DB.define(
   "Credentials",

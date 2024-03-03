@@ -7,6 +7,7 @@ import process from "node:process";
 import initRelations from "./db/initRelations";
 import authRouter from './routes/auth.routes'
 import errorHandlers from "./handlers/use.error.handlers";
+import { seeds } from "./db/seeds";
 dotenv.config();
 const PORT = process.env.PORT??3000;
 const app:Application = express();
@@ -23,15 +24,16 @@ DB.authenticate()
 DB.sync({ force: true })
   .then(() => {
     console.log("sync: ok");
+    seeds().then((response)=>{console.log(response)})
   })
   .catch(() => {
     console.log("sync: failed");
   });
 
+
 //db relations
 
 initRelations();
-
 //middlewares
 
 app.use(cors());

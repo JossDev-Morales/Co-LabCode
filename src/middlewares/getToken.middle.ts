@@ -35,7 +35,7 @@ async function tokenGetterFront(
     }
   }
 }
-function AuthTokenGetter(method:string){
+function AuthTokenGetter(method:"headers"|"params"|"body"|"query"){
   return async (
     req: Request,
     res: Response,
@@ -49,16 +49,24 @@ function AuthTokenGetter(method:string){
         token= req.params.token
       } else if(method=='body'){
         token= req.body.token
+      } else if (method=='query'){
+        token = req.query.token as string
       }
       if (!TokenDecoder.isExpired(token)) {
         const payload: JwtPayload = TokenTools.decode(token);
-        const [isInBlacklist, blacklistResponse] = await tokenServices.findSession(payload.jti as UUID);
+        if (payload.iss=="AUTH") {
+          const [isInBlacklist, blacklistResponse] = await tokenServices.findSession(payload.jti as UUID);
         if (!isInBlacklist) {
           req.tokenInfo = payload;
-          req.info.token=token
+          req.info={token}
           next();
         } else {
           throw new customError("BlackList","El token se encuentra en lista negra, se rechazo la conexion",403,3)
+        }
+        }else{
+          req.tokenInfo = payload;
+          req.info={token}
+          next();
         }
       } else {
         throw new customError("ExpiredToken", "El token ah expirado", 403, 2);

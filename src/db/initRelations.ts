@@ -1,11 +1,13 @@
 import CredentialsModel from './models/Model.Credentials'
 import userModel from './models/Model.Users'
 import blacklist from './models/Blacklist.sessions'
-export default function init() {
-    CredentialsModel.hasOne(userModel,{foreignKey:'credentialsId'})
-    userModel.belongsTo(CredentialsModel,{foreignKey:'credentialsId'})
+import RolesModel from './models/Model.Roles'
 
-    CredentialsModel.hasMany(blacklist,{foreignKey:'credentialsId'})
-    blacklist.hasOne(CredentialsModel,{foreignKey:'credentialsId'})
+export default function init() {
+    userModel.hasOne(CredentialsModel,{foreignKey:'credentialsId'})
+    CredentialsModel.belongsTo(userModel,{foreignKey:'credentialsId'})
+
+    userModel.belongsTo(RolesModel,{foreignKey:'mainrolColab'})
+    RolesModel.hasMany(userModel,{foreignKey:'mainrolColab'})
 }
 
