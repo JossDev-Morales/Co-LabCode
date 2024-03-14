@@ -46,12 +46,14 @@ async function signUpController(
     });
     
     const url = new URL(req.url, `http://${req.headers.host}`);
+    const token= Tokens.verification(credentialId)
+    console.log(token);
     await mailer.sendVerificationMail({
       colabname,
       mail,
       verificationToken: `${
         url.origin
-      }/colab-api/v1/auth/verify?token=${Tokens.verification(credentialId)}`,
+      }/colab-api/v1/auth/verify?token=${token}`,
     });
     const authTokens = Tokens.auth({
       credentialsId: credentialId,
@@ -96,7 +98,7 @@ async function logoutController(
     await blacklist.create({
       sessionId: jti,
       credentialsId,
-      timestamp: TokenDecoder.timestamp(req.headers.authorization as string),
+      timestamp: TokenDecoder.timestamp(req.headers.authorization?.split(" ")[1] as string),
     });
     res.sendStatus(200);
   } catch (error) {
@@ -163,7 +165,6 @@ async function signInController(
       );
     }
     if (!(await bcrypt.compare(password, credentials.password))) {
-      console.log("not pass");
       
       const failedAttemptsDate = await credentialsServices.getAttemptDate(
         credentials.id
@@ -175,22 +176,24 @@ async function signInController(
         if ((await credentialsServices.getAttemptsNumber(credentials.id)) < 4) {
           await credentialsServices.adAttempt(credentials.id);
         } else {
+          await credentialsServices.adAttempt(credentials.id);
           await credentialsServices.protect(credentials.id);
+          await mailer.sendProtectionMail({mail,colabname:"colabo",unprotectionToken:"token"})
         }
       }
       throw new customError(
         "InvalidCredentials",
         "Contraseña incorrecta",
         404,
-        5
+        5,{
+          attempts:(await credentialsServices.getAttemptsNumber(credentials.id))
+        }
       );
     }
     
     const user = await usersServices.getUserByCredentials(
       credentials.id
     );
-    console.log(credentials);
-    
     const authTokens = Tokens.auth({
       credentialsId: credentials.id,
       role: credentials.role,
@@ -198,8 +201,6 @@ async function signInController(
     });
     res.status(200).json(authTokens);
   } catch (error) {
-    console.log(error);
-    
     next(error);
   }
 }

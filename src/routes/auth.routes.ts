@@ -4,8 +4,8 @@ import {tokenGetterFront,AuthTokenGetter} from "../middlewares/getToken.middle";
 import {signUpController,logoutController, refreshingController, signInController, unprotectUserController, getRecoveryController, recoveryCredentials, verify, changeMailController, changePasswordController, undoAction, } from "../controlllers/auth.controller"
 const authRouter=Router()
 //routes
-authRouter.get(BR+"/auth/signup",signUpController)//pass
-authRouter.get(BR+"/auth/verify",AuthTokenGetter("query"),verify)//pass
+authRouter.post(BR+"/auth/signup",signUpController)//pass
+authRouter.post(BR+"/auth/verify",AuthTokenGetter("query"),verify)//pass
 //authRouter.get(BR+"/auth/signin/google")
 authRouter.post(BR+"/auth/logout",AuthTokenGetter('headers'),logoutController)//pass
 authRouter.get(BR+"/auth/refresh",AuthTokenGetter('headers'),refreshingController)//pass

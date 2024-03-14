@@ -57,6 +57,14 @@ export class TokenSpreed {
     });
     return token
   }
+  public unprotect(ID:UUID){
+    const token = jwt.sign({identifier:ID}, this.#key, {
+      algorithm: "HS256",
+      expiresIn: "7 days",
+      issuer: "UNPROTECT",
+    })
+    return token
+  }
 }
 export class TokenDecoder {
   #key: string;

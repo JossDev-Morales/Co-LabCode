@@ -47,20 +47,19 @@ export default function generalErrorHandler(
             errors: (nexterror as ValidationError).errors,
             img:"https://http.cat/400"
         })
-    } else if (nexterror !instanceof DatabaseError) {
-        throw nexterror
     } else {
-      console.warn("Error de tipo: ","Server error")
+        throw nexterror
+    } 
+  } catch (error) {
+    console.warn("Error de tipo: ","Server error")
+    console.log((error as Error).stack);
       res.status(500).json({
           status:500,
           code:52,
           type:"Server error",
-          name:nexterror.name,
-          message: nexterror.message,
+          name:(error as Error).name,
+          message: (error as Error).message,
           img:"https://http.cat/500"
       })
-    }
-  } catch (error) {
-    
   }
 }

@@ -44,7 +44,9 @@ function AuthTokenGetter(method:"headers"|"params"|"body"|"query"){
     try {
       let token:string=''
       if (method=='headers') {
-        token= req.headers.authorization as string;
+        token= (req.headers.authorization as string).split(" ")[1]
+        console.log(token);
+        
       }else if(method=='params'){
         token= req.params.token
       } else if(method=='body'){

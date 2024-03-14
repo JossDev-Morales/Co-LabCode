@@ -997,7 +997,7 @@ class ColabMailer {
         provider:"Google",
         typeOfConnection:"SMTP",
         toMail:mail,
-        typeOfMail:"Verification",
+        typeOfMail:"Protection",
         status:(error as SMTPError)?.command,
         SMTPCode:(error as SMTPError)?.code
       })
