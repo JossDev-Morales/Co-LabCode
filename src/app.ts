@@ -21,7 +21,7 @@ DB.authenticate()
   .catch((e) => {
     console.log("auth: failed", e);
   });
-DB.sync({ force: true })
+DB.sync({})
   .then(() => {
     console.log("sync: ok");
     seeds().then((response)=>{console.log(response)})
