@@ -9,13 +9,13 @@ authRouter.post(BR+"/auth/verify",AuthTokenGetter("query"),verify)//pass
 //authRouter.get(BR+"/auth/signin/google")
 authRouter.post(BR+"/auth/logout",AuthTokenGetter('headers'),logoutController)//pass
 authRouter.get(BR+"/auth/refresh",AuthTokenGetter('headers'),refreshingController)//pass
-authRouter.post(BR+"/auth/signin",signInController)
-authRouter.get(BR+"/auth/unprotect",AuthTokenGetter('query'),unprotectUserController)
-authRouter.post(BR+"/auth/recovery",getRecoveryController)
-authRouter.put(BR+"/auth/recovery",AuthTokenGetter('query'),recoveryCredentials)
-authRouter.put(BR+"/auth/me/credentials/mail",AuthTokenGetter('headers'),changeMailController)
-authRouter.put(BR+"/auth/me/credentials/password",AuthTokenGetter('headers'),changePasswordController)
-authRouter.post(BR+"/auth/undo",AuthTokenGetter('headers'),undoAction)
+authRouter.post(BR+"/auth/signin",signInController)//pass
+authRouter.get(BR+"/auth/unprotect",AuthTokenGetter('query'),unprotectUserController)//pass
+authRouter.post(BR+"/auth/recovery",getRecoveryController)//pass
+authRouter.put(BR+"/auth/recovery",AuthTokenGetter('query'),recoveryCredentials)//pass
+authRouter.put(BR+"/auth/me/mail",AuthTokenGetter('headers'),changeMailController)//pass
+authRouter.put(BR+"/auth/me/password",AuthTokenGetter('headers'),changePasswordController)//pass
+authRouter.post(BR+"/auth/undo",AuthTokenGetter('query'),undoAction)//pass
 
 
 

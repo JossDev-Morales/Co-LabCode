@@ -127,10 +127,22 @@ export class credentialsServices {
     { mail, password }: authCredentialsInfo
   ) {
     try {
-      await CredentialsModel.update(
-        { password, mail },
-        { where: { id: credentialsId } }
-      );
+      if (mail!=undefined && password!=undefined) {
+        await CredentialsModel.update(
+          { password, mail },
+          { where: { id: credentialsId }, returning: true }
+        );
+      } else if (mail!=undefined) {
+        await CredentialsModel.update(
+          { mail },
+          { where: { id: credentialsId }, returning: true }
+        );
+      } else if(password!=undefined){
+        await CredentialsModel.update(
+          { password },
+          { where: { id: credentialsId }, returning: true }
+        );
+      }
     } catch (error) {
       throw error;
     }

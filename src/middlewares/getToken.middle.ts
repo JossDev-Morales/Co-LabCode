@@ -44,14 +44,34 @@ function AuthTokenGetter(method:"headers"|"params"|"body"|"query"){
     try {
       let token:string=''
       if (method=='headers') {
+        if (req.headers.authorization===undefined) {
+          throw new customError("MissedAuthToken","Un token de autenticacion debe ser proporcionado",401,8,{
+            method:"Headers"
+          })
+        }
         token= (req.headers.authorization as string).split(" ")[1]
         console.log(token);
         
       }else if(method=='params'){
+        if (req.params.token===undefined) {
+          throw new customError("MissedAuthToken","Un token de autenticacion debe ser proporcionado",401,8,{
+            method:"Params"
+          })
+        }
         token= req.params.token
       } else if(method=='body'){
+        if (req.body.token===undefined) {
+          throw new customError("MissedAuthToken","Un token de autenticacion debe ser proporcionado",401,8,{
+            method:"Body"
+          })
+        }
         token= req.body.token
       } else if (method=='query'){
+        if (req.query.token===undefined) {
+          throw new customError("MissedAuthToken","Un token de autenticacion debe ser proporcionado",401,8,{
+            method:"Query"
+          })
+        }
         token = req.query.token as string
       }
       if (!TokenDecoder.isExpired(token)) {
