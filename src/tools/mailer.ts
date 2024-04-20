@@ -532,13 +532,13 @@ class ColabMailer {
       })
     }
   }
-  public async sendProtectionMail({mail,colabname,unprotectionToken}:infoProtectionMail){
+  public async sendProtectionMail({colabname,mail,unprotectionToken}:infoProtectionMail){
     try {
       const mailResponse=await this.#transporter.sendMail({
         from: `"${this.appName} Team" <${this.mail}>`,
             to: mail,
-            subject:`${this.appName} Seguridad`,
-            text: `${colabname} ¡Tu cuenta esta segura!`,
+            subject:`${this.appName} Proteccion`,
+            text: `${colabname} ¡Protegimos tu cuenta!`,
             html:`<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional //EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
             <html xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
             <head>
@@ -729,7 +729,7 @@ class ColabMailer {
                   <td class="v-container-padding-padding" style="overflow-wrap:break-word;word-break:break-word;padding:100px 10px 10px;font-family:arial,helvetica,sans-serif;" align="left">
                     
               <!--[if mso]><table width="100%"><tr><td><![endif]-->
-                <h1 class="v-font-size" style="margin: 0px; color: #ffffff; line-height: 140%; text-align: center; word-wrap: break-word; font-family: 'Montserrat',sans-serif; font-size: 22px; font-weight: 400;"><span><span><span><strong>Verificacion</strong></span></span></span></h1>
+                <h1 class="v-font-size" style="margin: 0px; color: #ffffff; line-height: 140%; text-align: center; word-wrap: break-word; font-family: 'Montserrat',sans-serif; font-size: 22px; font-weight: 400;"><span><span><span><strong>Proteccion</strong></span></span></span></h1>
               <!--[if mso]></td></tr></table><![endif]-->
             
                   </td>
@@ -743,7 +743,7 @@ class ColabMailer {
                   <td class="v-container-padding-padding" style="overflow-wrap:break-word;word-break:break-word;padding:10px;font-family:arial,helvetica,sans-serif;" align="left">
                     
               <!--[if mso]><table width="100%"><tr><td><![endif]-->
-                <h1 class="v-font-size" style="margin: 0px; color: #ffffff; line-height: 140%; text-align: center; word-wrap: break-word; font-family: 'Montserrat',sans-serif; font-size: 38px; font-weight: 400;"><span><span><strong></strong><br /></span colaboraciones y proyectos te esperan!an></span></h1>
+                <h1 class="v-font-size" style="margin: 0px; color: #ffffff; line-height: 140%; text-align: center; word-wrap: break-word; font-family: 'Montserrat',sans-serif; font-size: 38px; font-weight: 400;"><span><span><strong>¡Protegimos tu cuenta por seguridad, tu informacion esta segura!</strong><br /></span></span></h1>
               <!--[if mso]></td></tr></table><![endif]-->
             
                   </td>
@@ -757,9 +757,7 @@ class ColabMailer {
                   <td class="v-container-padding-padding" style="overflow-wrap:break-word;word-break:break-word;padding:10px 60px;font-family:arial,helvetica,sans-serif;" align="left">
                     
               <div class="v-font-size" style="font-size: 14px; color: #ffffff; line-height: 140%; text-align: center; word-wrap: break-word;">
-              <p style="line-height: 140%;">Tu cuenta fue protegida por actividad sospechosa o muchos intentos de inicio de sesión fallidos, pero no te preocupes</p>
-              <p style="line-height: 140%;"> </p>
-              <p style="line-height: 140%;">¡Estas seguro!</p>
+                <p style="line-height: 140%;">!Protegimos tu cuenta por actividad sospechosa o muchos intentos fallidos de inicio de sesion!</p>
               </div>
             
                   </td>
@@ -776,7 +774,7 @@ class ColabMailer {
             <div align="center">
               <!--[if mso]><table border="0" cellspacing="0" cellpadding="0"><tr><td align="center" bgcolor="#14b99f" style="padding:10px 20px;" valign="top"><![endif]-->
                 <a href="${unprotectionToken}" target="_blank" class="v-button v-font-size" style="box-sizing: border-box;display: inline-block;text-decoration: none;-webkit-text-size-adjust: none;text-align: center;color: #FFFFFF; background-color: #14b99f; border-radius: 30px;-webkit-border-radius: 30px; -moz-border-radius: 30px; width:auto; max-width:100%; overflow-wrap: break-word; word-break: break-word; word-wrap:break-word; mso-border-alt: none;font-size: 14px;">
-                  <span class="v-padding" style="display:block;padding:10px 20px;line-height:120%;"><strong><span style="font-size: 16px; line-height: 19.2px;">Iniciar sesión</span></strong></span>
+                  <span class="v-padding" style="display:block;padding:10px 20px;line-height:120%;"><strong><span style="font-size: 16px; line-height: 19.2px;">Iniciar sesion</span></strong></span>
                 </a>
                 <!--[if mso]></td></tr></table><![endif]-->
             </div>
@@ -962,42 +960,44 @@ class ColabMailer {
             attachments: [
               {
                   filename: 'simplelogo_sqr.png',
-                  path: path.resolve(__dirname,'public','mailer','simplelogo_sqr.png'),
+                  path: path.resolve(__dirname,'..', '..', 'public','mailer','simplelogo_sqr.png'),
                   cid: 'logo@nodemailer.com' //same cid value as in the html img src
               },
               {
                   filename: 'socialFacebook.png',
-                  path: path.resolve(__dirname,'public','mailer','socialFacebook.png'),
+                  path: path.resolve(__dirname,'..', '..', 'public','mailer','socialFacebook.png'),
                   cid: 'socialfacebook' //same cid value as in the html img src
               },
               {
                   filename: 'socialTwiter.png',
-                  path: path.resolve(__dirname,'public','mailer','socialTwiter.png'),
+                  path: path.resolve(__dirname,'..', '..', 'public','mailer','socialTwiter.png'),
                   cid: 'socialtwitter' //same cid value as in the html img src
               },
               {
                   filename: 'socialLinkedin.png',
-                  path: path.resolve(__dirname,'public','mailer','socialLinkedin.png'),
+                  path: path.resolve(__dirname,'..', '..', 'public','mailer','socialLinkedin.png'),
                   cid: 'sociallinkedin' //same cid value as in the html img src
               },
               {
                   filename: 'socialInstagram.png',
-                  path: path.resolve(__dirname,'public','mailer','socialinstagram.png'),
+                  path: path.resolve(__dirname,'..', '..', 'public','mailer','socialinstagram.png'),
                   cid: 'socialinstagram' //same cid value as in the html img src
               },
               {
                   filename: 'socialPinterest.png',
-                  path: path.resolve(__dirname,'public','mailer','socialPinterest.png'),
+                  path: path.resolve(__dirname,'..', '..', 'public','mailer','socialPinterest.png'),
                   cid: 'socialpinterest' //same cid value as in the html img src
               }
           ]
       })
     } catch (error) {
+      console.log(error);
+      
       throw new customError("FailedMailComunication","Something went wrong while sending a mail to you",400,42,{
         provider:"Google",
         typeOfConnection:"SMTP",
         toMail:mail,
-        typeOfMail:"Protection",
+        typeOfMail:"Verification",
         status:(error as SMTPError)?.command,
         SMTPCode:(error as SMTPError)?.code
       })
@@ -1008,7 +1008,7 @@ class ColabMailer {
       from: `"${this.appName} Team" <${this.mail}>`,
           to: mail,
           subject:`${this.appName} Seguridad`,
-          text: `${colabname} ¿No fuiste tu?¡Deshazlo!`,
+          text: `${colabname} ¿No fuiste tu? ¡Deshazlo!`,
           html:`<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional //EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
           <html xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
           <head>
@@ -1430,32 +1430,32 @@ class ColabMailer {
           attachments: [
             {
                 filename: 'simplelogo_sqr.png',
-                path: path.resolve(__dirname,'public','mailer','simplelogo_sqr.png'),
+                path: path.resolve(__dirname,'..', '..', 'public','mailer','simplelogo_sqr.png'),
                 cid: 'logo@nodemailer.com' //same cid value as in the html img src
             },
             {
                 filename: 'socialFacebook.png',
-                path: path.resolve(__dirname,'public','mailer','socialFacebook.png'),
+                path: path.resolve(__dirname,'..', '..', 'public','mailer','socialFacebook.png'),
                 cid: 'socialfacebook' //same cid value as in the html img src
             },
             {
                 filename: 'socialTwiter.png',
-                path: path.resolve(__dirname,'public','mailer','socialTwiter.png'),
+                path: path.resolve(__dirname,'..', '..', 'public','mailer','socialTwiter.png'),
                 cid: 'socialtwitter' //same cid value as in the html img src
             },
             {
                 filename: 'socialLinkedin.png',
-                path: path.resolve(__dirname,'public','mailer','socialLinkedin.png'),
+                path: path.resolve(__dirname,'..', '..', 'public','mailer','socialLinkedin.png'),
                 cid: 'sociallinkedin' //same cid value as in the html img src
             },
             {
                 filename: 'socialInstagram.png',
-                path: path.resolve(__dirname,'public','mailer','socialinstagram.png'),
+                path: path.resolve(__dirname,'..', '..', 'public','mailer','socialinstagram.png'),
                 cid: 'socialinstagram' //same cid value as in the html img src
             },
             {
                 filename: 'socialPinterest.png',
-                path: path.resolve(__dirname,'public','mailer','socialPinterest.png'),
+                path: path.resolve(__dirname,'..', '..', 'public','mailer','socialPinterest.png'),
                 cid: 'socialpinterest' //same cid value as in the html img src
             }
         ]
@@ -1466,7 +1466,7 @@ const mailResponse=await this.#transporter.sendMail({
       from: `"${this.appName} Team" <${this.mail}>`,
           to: mail,
           subject:`${this.appName} Seguridad`,
-          text: `${colabname} ¿Perdiste acceso a tu cuenta?¡Recuperala!`,
+          text: `${colabname} ¿Perdiste acceso a tu cuenta? ¡Recuperala!`,
           html:`<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional //EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
           <html xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
           <head>
@@ -1888,32 +1888,32 @@ const mailResponse=await this.#transporter.sendMail({
           attachments: [
             {
                 filename: 'simplelogo_sqr.png',
-                path: path.resolve(__dirname,'public','mailer','simplelogo_sqr.png'),
+                path: path.resolve(__dirname,'..', '..', 'public','mailer','simplelogo_sqr.png'),
                 cid: 'logo@nodemailer.com' //same cid value as in the html img src
             },
             {
                 filename: 'socialFacebook.png',
-                path: path.resolve(__dirname,'public','mailer','socialFacebook.png'),
+                path: path.resolve(__dirname,'..', '..', 'public','mailer','socialFacebook.png'),
                 cid: 'socialfacebook' //same cid value as in the html img src
             },
             {
                 filename: 'socialTwiter.png',
-                path: path.resolve(__dirname,'public','mailer','socialTwiter.png'),
+                path: path.resolve(__dirname,'..', '..', 'public','mailer','socialTwiter.png'),
                 cid: 'socialtwitter' //same cid value as in the html img src
             },
             {
                 filename: 'socialLinkedin.png',
-                path: path.resolve(__dirname,'public','mailer','socialLinkedin.png'),
+                path: path.resolve(__dirname,'..', '..', 'public','mailer','socialLinkedin.png'),
                 cid: 'sociallinkedin' //same cid value as in the html img src
             },
             {
                 filename: 'socialInstagram.png',
-                path: path.resolve(__dirname,'public','mailer','socialinstagram.png'),
+                path: path.resolve(__dirname,'..', '..', 'public','mailer','socialinstagram.png'),
                 cid: 'socialinstagram' //same cid value as in the html img src
             },
             {
                 filename: 'socialPinterest.png',
-                path: path.resolve(__dirname,'public','mailer','socialPinterest.png'),
+                path: path.resolve(__dirname,'..', '..', 'public','mailer','socialPinterest.png'),
                 cid: 'socialpinterest' //same cid value as in the html img src
             }
         ]
