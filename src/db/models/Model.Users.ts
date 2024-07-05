@@ -97,12 +97,10 @@ const userModel = DB.define(
     },
     phoneNumber: {
       type: DataTypes.STRING(10),
-      allowNull: false,
       field: "phone_number",
     },
     phonePrefix: {
       type: DataTypes.STRING(3),
-      allowNull: false,
       field: "phone_prefix",
     },
     stars: {

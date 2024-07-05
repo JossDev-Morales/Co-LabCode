@@ -8,6 +8,7 @@ import initRelations from "./db/initRelations";
 import authRouter from './routes/auth.routes'
 import errorHandlers from "./handlers/use.error.handlers";
 import { seeds } from "./db/seeds";
+import rolesRouter from "./routes/roles.routes";
 dotenv.config();
 const PORT = process.env.PORT??3000;
 const app:Application = express();
@@ -21,7 +22,7 @@ DB.authenticate()
   .catch((e) => {
     console.log("auth: failed", e);
   });
-DB.sync({})
+DB.sync({force:true})
   .then(() => {
     console.log("sync: ok");
     seeds().then((response)=>{console.log(response)})
@@ -43,6 +44,7 @@ app.use(express.json());
 //routers
 
 app.use(authRouter)
+app.use(rolesRouter)
 
 //healthy status
 
