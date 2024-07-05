@@ -46,6 +46,12 @@ throw new customError("MissedAuthToken","Un token de autenticacion debe ser prop
 })
 ```
 ```js
+throw new customError("MissedData","Informacion invalida, alterada o con un formato invalido ah sido ingresada",400,9,{
+  method:"",
+  details:[]
+})
+```
+```js
 throw new customError("FailedMailConnection","Something went wrong while connecting with the SMTP provider",500,41,{
     provider:"Google",
     typeOfConnection:"SMTP"
