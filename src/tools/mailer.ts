@@ -509,7 +509,7 @@ class ColabMailer {
               },
               {
                   filename: 'socialInstagram.png',
-                  path: path.resolve(__dirname,'..', '..', 'public','mailer','socialinstagram.png'),
+                  path: path.resolve(__dirname,'..', '..', 'public','mailer','socialInstagram.png'),
                   cid: 'socialinstagram' //same cid value as in the html img src
               },
               {
