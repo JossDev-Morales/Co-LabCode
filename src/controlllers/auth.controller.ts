@@ -260,6 +260,7 @@ async function signInController(
       userId: user.id,
       colabname: user.colabname,
     });
+    credentialsServices.attemptsToZero(credentials.id)
     res.status(200).json(authTokens);
   } catch (error) {
     next(error);
